@@ -13,11 +13,17 @@ ap.add_argument("-b", "--buffer", type=int, default=64,
 	help="max buffer size")
 args = vars(ap.parse_args())
 
+green = np.uint8([[[255,240,0]]])
+hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
+print hsv_green
+
 # define the lower and upper boundaries of the "green"
 # ball in the HSV color space, then initialize the
 # list of tracked points
+# lower is brighter
+# upper is darker
 greenLower = (29, 86, 6)
-greenUpper = (64, 255, 255)
+greenUpper = (84, 255, 255)
 pts = deque(maxlen=args["buffer"])
  
 # if a video path was not supplied, grab the reference
